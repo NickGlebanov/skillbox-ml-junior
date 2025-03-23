@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:17.4-bookworm
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+      - ./mydb.dump:/tmp/mydb.dump
+
+volumes:
+  pgdata:
